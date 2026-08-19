@@ -76,17 +76,13 @@ button {
     font-weight: bold;
 }
 
-button:hover {
-    background-color: #0051bb;
+#erro-mensagem, #erro-edicao{
+    display:none;
+    color: red;
 }
 
-
-.erro-texto {
-    display: block;
-    color: #e00;
-    font-size: 0.85rem;
-    margin-top: 0.4rem;
-    min-height: 1.2rem;
+button:hover {
+    background-color: #0051bb;
 }
 
 
@@ -126,8 +122,10 @@ button:hover {
 .item-lista.comprado {
     border-left-color: #22c55e;
     background: #f0fdf4;
-    text-decoration: line-through;
     color: #666;
+}
+.item-lista.comprado span {
+    text-decoration: line-through;
 }
 
 .botao-acao {
@@ -137,16 +135,53 @@ button:hover {
    
 }
 
-#confirmar-remocao {
+#confirmar-remocao, #editar-item {
     display: none;
+    position: fixed;
     gap: 20px;
     justify-content: center;
-    margin-top : 40px;
+    align-content: center;
+    align-items: center;
+    background: white;
+    width: 400px;
+    top:50%;
+    left:50%;
+    height: 100px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%,-50%);
 }
 
-.botao-alternar { background-color: #22c55e;     text-decoration: none;}
-.botao-editar { background-color: #0070f3;     text-decoration: none;}
-.botao-deletar { background-color: #ef4444;     text-decoration: none;}
+#editar-item {
+    width: 300px;
+    height: 300px;
+    flex-direction: column;
+    gap:20px;
+}
+
+#editar-item div {
+    gap: 10px;
+}
+
+.botao-alternar { 
+    background-color: #22c55e;
+}
+.botao-alternar:hover{
+    background-color: darkgreen;
+}
+.botao-editar { 
+    background-color: #0070f3;
+}
+.botao-editar:hover{
+    background-color: darkblue;
+}
+.botao-deletar { 
+    background-color: #ef4444;
+}
+.botao-deletar:hover{
+    background-color: darkred;
+}
 
 
 

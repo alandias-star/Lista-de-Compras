@@ -5,15 +5,32 @@ const inputNome = document.getElementById('nome');
 const erroMensagem = document.getElementById('erro-mensagem');
 const listaPendentes = document.getElementById('lista-pendentes');
 const listaComprados = document.getElementById('lista-comprados');
-const remocao = document.getElementById("confirmar-remocao");
+const edicao = document.getElementById('editar-item');
+const remocao = document.getElementById('confirmar-remocao');
 
 function salvarDados() {
     localStorage.setItem('lista-compras', JSON.stringify(itens));
 }
 
+function validarItem(nome){
+    return !itens.some(item => item.nome === nome);
+}
+
+function MostrarMensagemErro(mensagem)
+{
+    erroMensagem.innerHTML = mensagem;
+    erroMensagem.style.display = "inline";
+}
+
 function adicionarItem(nome) {
     const nomeItem = nome.trim();
-
+    if (!validarItem(nomeItem))
+    {   
+        MostrarMensagemErro("Item já existente, forneça um item novo");
+        limparFormulario();
+        return;
+    }
+    erroMensagem.style.display = "none";
     const novoItem = {
         id: Date.now(),
         nome: nomeItem,
@@ -51,15 +68,18 @@ function limparFormulario() {
 
 function criarElementoHTML(item) {
     const li = document.createElement('li');
-    li.className = `item-lista ${item.comprado ? 'comprado' : '➕'}`;
+    const nome = JSON.stringify(item.nome);
+    li.className = `item-lista ${item.comprado ? 'comprado' : ''}`;
     li.innerHTML = `
-        <div>${item.nome}</div>
+        <div><span>${item.nome}</span></div>
         <div class="botao-acao">
         <button class="botao-alternar" onclick="alternarStatusItem(${item.id})" >
             ${item.comprado ? '​​↩️' : '➕'}
         </button>
-        
-        <button class="botao-deletar" onclick="confirmarRemocao(${item.id})">
+        <button class="botao-editar" onclick="mostrarEdicaoItem(${item.id}, '${item.nome}')" >
+            ✏️
+        </button>
+        <button class="botao-deletar" onclick="confirmarRemocao(${item.id}, '${item.nome}')">
             ✖️
             </button>
         </div>
@@ -67,14 +87,67 @@ function criarElementoHTML(item) {
     return li;
 }
 
+function mostrarEdicaoItem(id, nome){
+    edicao.innerHTML = `
+      <h3>Editando ${nome}</h3>
+            <div>
+            <label for="text">Nome do item</label>
+            <input 
+                    required
+                    type="text" 
+                    id="nome-novo" 
+                    placeholder="Ex: Arroz, Feijão..." 
+                   maxlength="30"
+                   >
+            </div>
+                <span id="erro-edicao"></span>
+                   <div>
+            <button class="botao-editar" onclick="cancelarEdicao()">Cancelar</button>
+            <button class="botao-alternar" onclick="editarItem(${id})">Salvar</button>
+            </div>
+    `
+    edicao.style.display = "flex";
+    remocao.style.display = "none";
+    
+}
+
+function editarItem(id)
+{
+    const erroEdicao = document.getElementById('erro-edicao');
+    if (!validarItem(document.getElementById('nome-novo').value.trim()))
+    {   
+        MostrarMensagemErroEdicao("Item já existente, forneça um item novo");
+        return;
+    }    
+    erroEdicao.style.display = "none";
+    edicao.style.display = "none";
+    itens.forEach(item => {
+        if (item.id === id)
+        {
+            item.nome = document.getElementById('nome-novo').value.trim();
+        }
+    });
+    salvarDados();
+    renderizarListas();
+}
+
+function MostrarMensagemErroEdicao(mensagem){
+    const erroEdicao = document.getElementById('erro-edicao');
+    erroEdicao.innerHTML = mensagem;
+    erroEdicao.style.display = "inline";
+}
+
+function cancelarEdicao(){
+    edicao.style.display = "none";
+}
+
 function confirmarRemocao(id, nome) {
     remocao.innerHTML = `          
-            <h3>Confirmar remoção?</h3>
+            <h3>Confirmar remoção de ${nome}?</h3>
             <button class="botao-editar" onclick="cancelarRemocao()">Cancelar</button>
             <button class="botao-deletar" onclick="deletarItem(${id})">Sim</button>`;
     remocao.style.display = "flex";
-    salvarDados();
-    renderizarListas();
+     edicao.style.display = "none";
 }
 
 function cancelarRemocao() {
