@@ -108,11 +108,11 @@ function mostrarEdicaoItem(id, nome) {
 }
 
 function editarItem(id) {
+  const erroEdicao = document.getElementById("erro-edicao");
   if (document.getElementById("nome-novo").value.trim() === "") {
     mostrarMensagemErroEdicao("O nome do item não pode ser vazio.");
     return;
   }
-  const erroEdicao = document.getElementById("erro-edicao");
 
   if (!validarItem(document.getElementById("nome-novo").value.trim())) {
     mostrarMensagemErroEdicao("Item já existente, forneça um item novo");

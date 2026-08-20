@@ -146,6 +146,9 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
+.item-lista.comprado span {
+  text-decoration: line-through;
+}
 
 .botao-acao {
   display: flex;
