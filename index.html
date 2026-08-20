@@ -1,45 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Compras</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <main class="container">
-        <header>
-            <h1> Lista de Compras</h1>
-            <p>Organize suas compras de forma simples e sem frustrações.</p>
-        </header>
-        <form id="formulario" aria-label="Cadastro de novos itens">
-            <div class="grupo">
-                <label for="nome">Nome do item</label>
-                <input 
-                    required
-                    type="text" 
-                    id="nome" 
-                    placeholder="Ex: Arroz, Feijão..." 
-                   maxlength="30"
-                >
-                <button type="submit" aria-label="Adicionar item à lista">Adicionar</button>
-            </div>
-            <span id="erro-mensagem" class="erro-texto" role="alert"></span>
-        </form>
-        <section class="lista-secao">
-            <h2>Itens para Comprar</h2>
-            <ul id="lista-pendentes" aria-label="Itens pendentes">
-            </ul>
-        </section>
-        <section class="lista-secao-comprado">
-            <h2>Já Comprados</h2>
-            <ul id="lista-comprados" aria-label="Itens já comprados">   
-            </ul>
-        </section>
-        <div id="confirmar-remocao">
-            
+      <header>
+        <h1>Lista de Compras</h1>
+        <p>Organize suas compras de forma simples</p>
+      </header>
+      <form id="formulario" aria-label="Cadastro de novos itens">
+        <div class="grupo">
+          <label for="nome">Nome do item</label>
+          <input
+            required
+            type="text"
+            id="nome"
+            placeholder="Ex: Arroz, Feijão..."
+            maxlength="30"
+          />
+          <button type="submit" aria-label="Adicionar item à lista">
+            Adicionar
+          </button>
         </div>
+        <span id="erro-mensagem"></span>
+      </form>
+      <section class="lista-secao">
+        <h2>Itens para Comprar</h2>
+        <ul id="lista-pendentes" aria-label="Itens pendentes"></ul>
+      </section>
+      <section class="lista-secao-comprado">
+        <h2>Já Comprados</h2>
+        <ul id="lista-comprados" aria-label="Itens já comprados"></ul>
+      </section>
+      <div id="editar-item"></div>
+      <div id="confirmar-remocao"></div>
     </main>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

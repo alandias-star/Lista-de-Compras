@@ -1,155 +1,185 @@
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-    background-color: #f4f6f9;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    padding: 2rem 1rem;
+  background-color: #f4f6f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
 .container {
-    background: #ffffff;
-    width: 100%;
-    max-width: 1000px;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-h3{
-    padding: 0.8rem 1.2rem;
-    color: black;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-}
 header h1 {
-    font-size: 1.8rem;
-    color: #1a1a1a;
-    margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
 }
 
 header p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
 }
 
 label {
-     
-    color: black;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
 }
 
-.grupo{
-    display: flex;
-    margin : 2px;
-    align-items: center;
-    gap: 15px;
-    
+.grupo {
+  display: flex;
+  margin: 2px;
+  align-items: center;
+  gap: 15px;
 }
 
 input[type="text"] {
-    flex: 1;
-    padding: 0.8rem;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
 }
 
 button {
-    padding: 0.8rem 1.2rem;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
+  padding: 0.8rem 1.2rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #0051bb;
+  background-color: #0051bb;
 }
-
-
-.erro-texto {
-    display: block;
-    color: #e00;
-    font-size: 0.85rem;
-    margin-top: 0.4rem;
-    min-height: 1.2rem;
-}
-
 
 .lista-secao {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-   
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .lista-secao h2 {
-    
-    color: #444;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid blue;
+  color: #444;
+  margin-bottom: 0.5rem;
+  border-bottom: 5px solid blue;
 }
 
 .lista-secao-comprado h2 {
-    
-    color: #444;
-    margin-bottom: 0.5rem;
-    border-bottom: 2px solid green;
+  color: #444;
+  margin-bottom: 0.5rem;
+  border-bottom: 5px solid green;
 }
 
-
 .item-lista {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f9f9f9;
-    padding: 0.75rem;
-    border-radius: 6px;
-    margin-bottom: 0.5rem;
-    border-left: 4px solid #0070f3;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid #0070f3;
 }
 
 .item-lista.comprado {
-    border-left-color: #22c55e;
-    background: #f0fdf4;
-    text-decoration: line-through;
-    color: #666;
+  border-left-color: #22c55e;
+  background: #f0fdf4;
+  color: #666;
+}
+
+.item-lista.comprado span {
+  text-decoration: line-through;
+}
+
+#erro-mensagem,
+#erro-edicao {
+  display: none;
+  color: red;
+}
+
+#confirmar-remocao,
+#editar-item {
+  display: none;
+  position: fixed;
+  gap: 20px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: white;
+  width: 90%;
+  max-width: 575px;
+  top: 50%;
+  left: 50%;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#editar-item {
+  flex-direction: column;
+  gap: 20px;
+}
+
+#editar-item div {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
 .botao-acao {
-    display: flex;
-    gap : 20px;
-    text-decoration: none;
-   
+  display: flex;
+  gap: 20px;
+  text-decoration: none;
 }
 
-#confirmar-remocao {
-    display: none;
-    gap: 20px;
-    justify-content: center;
-    margin-top : 40px;
+.botao-alternar {
+  background-color: #22c55e;
+}
+.botao-alternar:hover {
+  background-color: darkgreen;
 }
 
-.botao-alternar { background-color: #22c55e;     text-decoration: none;}
-.botao-editar { background-color: #0070f3;     text-decoration: none;}
-.botao-deletar { background-color: #ef4444;     text-decoration: none;}
+.botao-editar {
+  background-color: #0070f3;
+}
+.botao-editar:hover {
+  background-color: darkblue;
+}
 
+.botao-deletar {
+  background-color: #ef4444;
+}
+.botao-deletar:hover {
+  background-color: darkred;
+}
 
-
-
-
-
+@media (max-width: 600px) {
+  .grupo {
+    flex-direction: column;
+  }
+  .grupo button,
+  input[type="text"] {
+    width: 100%;
+  }
+}
