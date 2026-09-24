@@ -1,3 +1,6 @@
+/* ==========================================================================
+   ESTADO DA APLICAÇÃO E VARIÁVEIS DOM
+   ========================================================================== */
 let itens = JSON.parse(localStorage.getItem("lista-compras")) || [];
 
 const form = document.getElementById("formulario");
@@ -8,14 +11,41 @@ const listaComprados = document.getElementById("lista-comprados");
 const edicao = document.getElementById("editar-item");
 const remocao = document.getElementById("confirmar-remocao");
 
+const qtdTotal = document.getElementById("qtd-total");
+const qtdPendentes = document.getElementById("qtd-pendentes");
+const qtdComprados = document.getElementById("qtd-comprados");
+
+/* ==========================================================================
+   PERSISTÊNCIA DE DADOS & CONTADOR
+   ========================================================================== */
 function salvarDados() {
   localStorage.setItem("lista-compras", JSON.stringify(itens));
 }
 
-function validarItem(nome) {
-  return !itens.some((item) => item.nome === nome);
+function atualizarContadores() {
+  const total = itens.length;
+  const comprados = itens.filter((item) => item.comprado).length;
+  const pendentes = total - comprados;
+
+  if (qtdTotal) qtdTotal.textContent = total;
+  if (qtdPendentes) qtdPendentes.textContent = pendentes;
+  if (qtdComprados) qtdComprados.textContent = comprados;
 }
 
+/* ==========================================================================
+   VALIDAÇÕES
+   ========================================================================== */
+function validarItem(nome) {
+  const temAoMenosUmaLetra = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+
+  if (!temAoMenosUmaLetra.test(nome)) {
+    return false;
+  }
+  return !itens.some((item) => item.nome.toLowerCase() === nome.toLowerCase());
+}
+/* ==========================================================================
+   MANIPULAÇÃO DA LISTA DE ITENS
+   ========================================================================== */
 function mostrarMensagemErro(mensagem) {
   erroMensagem.innerHTML = mensagem;
   erroMensagem.style.display = "inline";
@@ -23,6 +53,13 @@ function mostrarMensagemErro(mensagem) {
 
 function adicionarItem(nome) {
   const nomeItem = nome.trim();
+  const temAoMenosUmaLetra = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+
+  if (!temAoMenosUmaLetra.test(nomeItem)) {
+    mostrarMensagemErro("Por favor, digite um nome válido contendo letras.");
+    return;
+  }
+
   if (!validarItem(nomeItem)) {
     mostrarMensagemErro("Item já existente, forneça um item novo");
     limparFormulario();
@@ -63,6 +100,9 @@ function limparFormulario() {
   inputNome.value = "";
 }
 
+/* ==========================================================================
+   RENDERIZAÇÃO DA INTERFACE 
+   ========================================================================== */
 function criarElementoHTML(item) {
   const li = document.createElement("li");
   const nome = JSON.stringify(item.nome);
@@ -84,6 +124,9 @@ function criarElementoHTML(item) {
   return li;
 }
 
+/* ==========================================================================
+   MODAIS DE EDIÇÃO E CONFIRMAÇÃO DE REMOÇÃO
+   ========================================================================== */
 function mostrarEdicaoItem(id, nome) {
   edicao.innerHTML = `
       <h3>Editando ${nome}</h3>
@@ -109,12 +152,21 @@ function mostrarEdicaoItem(id, nome) {
 
 function editarItem(id) {
   const erroEdicao = document.getElementById("erro-edicao");
-  if (document.getElementById("nome-novo").value.trim() === "") {
+  const novoValor = document.getElementById("nome-novo").value.trim();
+  const temAoMenosUmaLetra = /[A-Za-zÀ-ÖØ-öø-ÿ]/;
+
+  if (novoValor === "") {
     mostrarMensagemErroEdicao("O nome do item não pode ser vazio.");
     return;
   }
 
-  if (!validarItem(document.getElementById("nome-novo").value.trim())) {
+  if (!temAoMenosUmaLetra.test(novoValor)) {
+    mostrarMensagemErroEdicao(
+      "Por favor, digite um nome válido contendo letras.",
+    );
+    return;
+  }
+  if (!validarItem(novoValor)) {
     mostrarMensagemErroEdicao("Item já existente, forneça um item novo");
     return;
   }
@@ -122,7 +174,7 @@ function editarItem(id) {
   edicao.style.display = "none";
   itens.forEach((item) => {
     if (item.id === id) {
-      item.nome = document.getElementById("nome-novo").value.trim();
+      item.nome = novoValor;
     }
   });
   salvarDados();
@@ -152,6 +204,9 @@ function cancelarRemocao() {
   remocao.style.display = "none";
 }
 
+/* ==========================================================================
+   INICIALIZAÇÃO E EVENTOS
+   ========================================================================== */
 function renderizarListas() {
   listaPendentes.innerHTML = "";
   listaComprados.innerHTML = "";
@@ -164,10 +219,13 @@ function renderizarListas() {
       listaPendentes.appendChild(elementoHTML);
     }
   });
+
+  atualizarContadores();
 }
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   adicionarItem(inputNome.value);
 });
+
 renderizarListas();

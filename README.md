@@ -18,6 +18,10 @@ Para este projeto, optou-se pelo uso de **JavaScript Vanilla, HTML5 e CSS3 puros
 - [x] **Remover Item:** Exclusão individual com confirmação prévia para prevenção de erros.
 - [x] **Persistência de Dados:** Salvamento automático no `localStorage` do navegador.
 - [x] **Layout Responsivo:** Adaptação do layout para telas mobile via Media Queries.
+- [x] **Contador de Quantidade:** Indicador dinâmico exibindo o total de itens, pendentes e comprados.
+- [x] **Validação de Entrada:** Restrição que impede o cadastro de apenas números ou entradas não textuais.
+
+---
 
 ---
 

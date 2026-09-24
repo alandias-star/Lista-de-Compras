@@ -1,3 +1,24 @@
+/* ==========================================================================
+   PALETA DE CORES 
+   ========================================================================== */
+:root {
+  --cor-fundo: #f4f6f9;
+  --cor-card: #ffffff;
+  --cor-texto: #333333;
+  --cor-texto-suave: #666666;
+  --cor-primaria: #0070f3;
+  --cor-primaria-hover: #0051bb;
+  --cor-sucesso: #22c55e;
+  --cor-sucesso-hover: darkgreen;
+  --cor-sucesso-fundo: #f0fdf4;
+  --cor-perigo: #ef4444;
+  --cor-perigo-hover: darkred;
+  --cor-borda: #ccc;
+}
+
+/* ==========================================================================
+   RESET & ESTILOS BASE
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -6,15 +27,18 @@
 }
 
 body {
-  background-color: #f4f6f9;
-  color: #333;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
   display: flex;
   justify-content: center;
   padding: 2rem 1rem;
 }
 
+/* ==========================================================================
+   LAYOUT PRINCIPAL
+   ========================================================================== */
 .container {
-  background: #ffffff;
+  background: var(--cor-card);
   width: 100%;
   max-width: 1000px;
   padding: 2rem;
@@ -30,10 +54,31 @@ header h1 {
 
 header p {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--cor-texto-suave);
   margin-bottom: 1.5rem;
 }
 
+/* ==========================================================================
+   CONTADOR DE QUANTIDADE
+   ========================================================================== */
+.contador-container {
+  background-color: var(--cor-fundo);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--cor-texto-suave);
+}
+
+.contador-container strong {
+  color: var(--cor-primaria);
+}
+
+/* ==========================================================================
+   FORMULÁRIOS E INPUTS
+   ========================================================================== */
 label {
   color: black;
   border: none;
@@ -51,15 +96,18 @@ label {
 input[type="text"] {
   flex: 1;
   padding: 0.8rem;
-  border: 2px solid #ccc;
+  border: 2px solid var(--cor-borda);
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.2s;
 }
 
+/* ==========================================================================
+   BOTÕES E AÇÕES
+   ========================================================================== */
 button {
   padding: 0.8rem 1.2rem;
-  background-color: #0070f3;
+  background-color: var(--cor-primaria);
   color: white;
   border: none;
   border-radius: 6px;
@@ -68,9 +116,12 @@ button {
 }
 
 button:hover {
-  background-color: #0051bb;
+  background-color: var(--cor-primaria-hover);
 }
 
+/* ==========================================================================
+   SEÇÕES E LISTAS DE ITENS
+   ========================================================================== */
 .lista-secao {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -96,13 +147,13 @@ button:hover {
   padding: 0.75rem;
   border-radius: 6px;
   margin-bottom: 0.5rem;
-  border-left: 4px solid #0070f3;
+  border-left: 4px solid var(--cor-primaria);
 }
 
 .item-lista.comprado {
-  border-left-color: #22c55e;
-  background: #f0fdf4;
-  color: #666;
+  border-left-color: var(--cor-sucesso);
+  background: var(--cor-sucesso-fundo);
+  color: var(--cor-texto-suave);
 }
 
 .item-lista.comprado span {
@@ -112,9 +163,12 @@ button:hover {
 #erro-mensagem,
 #erro-edicao {
   display: none;
-  color: red;
+  color: var(--cor-perigo);
 }
 
+/* ==========================================================================
+   MODAIS DE EDIÇÃO E REMOÇÃO
+   ========================================================================== */
 #confirmar-remocao,
 #editar-item {
   display: none;
@@ -146,9 +200,6 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
-.item-lista.comprado span {
-  text-decoration: line-through;
-}
 
 .botao-acao {
   display: flex;
@@ -157,26 +208,29 @@ button:hover {
 }
 
 .botao-alternar {
-  background-color: #22c55e;
+  background-color: var(--cor-sucesso);
 }
 .botao-alternar:hover {
-  background-color: darkgreen;
+  background-color: var(--cor-sucesso-hover);
 }
 
 .botao-editar {
-  background-color: #0070f3;
+  background-color: var(--cor-primaria);
 }
 .botao-editar:hover {
   background-color: darkblue;
 }
 
 .botao-deletar {
-  background-color: #ef4444;
+  background-color: var(--cor-perigo);
 }
 .botao-deletar:hover {
-  background-color: darkred;
+  background-color: var(--cor-perigo-hover);
 }
 
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
 @media (max-width: 600px) {
   .grupo {
     flex-direction: column;
